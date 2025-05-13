@@ -172,7 +172,8 @@
     <child link="finger_right" />
     <origin xyz="-0.175 0 0.125" rpy="0 -1.5707963267948966 0" />
     <axis xyz="0 0 1"/>
-    <limit effort="1000.0" lower="-0.15" upper="0" velocity="0.5"/>  </joint>
+    <limit effort="1000.0" lower="-0.15" upper="0" velocity="0.5"/> 
+    <mimic joint="gripper_base_to_finger_left" multiplier="-1"/> </joint> 
   <link name="finger_right">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
