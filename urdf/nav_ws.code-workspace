@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		}
+	],
+	"settings": {
+		"python.autoComplete.extraPaths": [
+			"/home/bitnut/temp_2_ws/src/quad_rover_kinematics/install/rex_interfaces/lib/python3.12/site-packages",
+			"/home/bitnut/ouster_ws/install/ouster_sensor_msgs/lib/python3.12/site-packages",
+			"/home/bitnut/raptor_ws/install/rex_interfaces/lib/python3.12/site-packages",
+			"/opt/ros/jazzy/lib/python3.12/site-packages"
+		],
+		"python.analysis.extraPaths": [
+			"/home/bitnut/temp_2_ws/src/quad_rover_kinematics/install/rex_interfaces/lib/python3.12/site-packages",
+			"/home/bitnut/ouster_ws/install/ouster_sensor_msgs/lib/python3.12/site-packages",
+			"/home/bitnut/raptor_ws/install/rex_interfaces/lib/python3.12/site-packages",
+			"/opt/ros/jazzy/lib/python3.12/site-packages"
+		],
+		"github.copilot.chat.codeGeneration.useInstructionFiles": true
+	}
+}

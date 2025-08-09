@@ -1,39 +1,34 @@
 <?xml version="1.0"?>
 <robot name="sensor_stack" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:arg name="base_link_name" default="bask_link"/>
+  <!-- Args -->
+  <xacro:arg name="base_link_name" default="base_link"/>
   <xacro:arg name="rot_link" default="rot_link"/>
 
   <!-- Ouster pose -->
   <xacro:arg name="os1_xyz" default="0.00 0.00 0.09"/>
   <xacro:arg name="os1_rpy" default="0 0 0"/>
 
-  <!-- ZED2i pose -->
+  <!-- ZED2i pose (mount transform of zed2i_camera_link to rot_link) -->
   <xacro:arg name="zed_xyz" default="0.05 0.00 0.0"/>
   <xacro:arg name="zed_rpy" default="0 0 0"/>
 
+  <!-- Base links -->
   <link name="$(arg base_link_name)"/>
-    <link name="$(arg rot_link)"/>
+  <link name="$(arg rot_link)"/>
+
+  <!-- rot_link -> base_link with -15 deg pitch -->
   <joint name="$(arg base_link_name)_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 -0.26179 0"/>
-    <parent link="$(arg rot_link)"/>
-    <child link="$(arg base_link_name)"/>
-    </joint>
+    <origin xyz="0 0 0" rpy="0 0.26179 0"/>
+    <parent link="$(arg base_link_name)"/>
+    <child link="$(arg rot_link)"/>
+  </joint>
 
-
-
-  <!--  Include your sensor Xacros (no copy/paste)  -->
+  <!-- Includes -->
   <xacro:include filename="$(find urdf_viewer)/urdf/ouster_os1.urdf.xacro"/>
   <xacro:include filename="$(find urdf_viewer)/urdf/zed_macro.urdf.xacro"/>
 
-
-  <!-- NOTE: zed_descr.urdf.xacro is a full robot, not a macro.
-       Don't include it here or you'll get nested <robot> tags.
-       Use the zed_camera macro from zed_macro.urdf.xacro instead. -->
-
-  <!--  Instantiate sensors on the base  -->
-
-  <!-- Ouster OS1-64 (macro name matches your file) -->
+  <!-- Ouster OS1-64 -->
   <xacro:OS1-64 parent="$(arg rot_link)"
                 name="os1"
                 topic_points="/os1/points"
@@ -43,9 +38,20 @@
     <origin xyz="$(arg os1_xyz)" rpy="$(arg os1_rpy)"/>
   </xacro:OS1-64>
 
-  <!-- ZED2i -->
-  <xacro:zed_camera name="zed2i" model="zed2i" parent="$(arg rot_link)">
-    <origin xyz="$(arg zed_xyz)" rpy="$(arg zed_rpy)"/>
-  </xacro:zed_camera>
+  <!-- ZED2i: instantiate macro (creates zed2i_camera_link …), then mount it -->
+  <xacro:zed_camera name="zed2i" model="zed2i" enable_gnss="false">
+  <!-- block required by *gnss_origin; used only if GNSS is enabled -->
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</xacro:zed_camera>
 
+  <!-- Mount ZED to rot_link (this replaces the old 'parent' + nested origin) -->
+  <joint name="zed2i_mount" type="fixed">
+    <parent link="$(arg rot_link)"/>
+    <child  link="zed2i_camera_link"/>
+    <origin xyz="$(arg zed_xyz)" rpy="$(arg zed_rpy)"/>
+  </joint>
+
+  <!-- NOTE:
+       Do NOT include zed_descr.urdf.xacro here (it’s a full <robot/> wrapper).
+       Use only zed_macro.urdf.xacro as above. -->
 </robot>

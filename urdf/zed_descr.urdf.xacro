@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-// Copyright 2022 Stereolabs
+// Copyright 2024 Stereolabs
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,22 +19,15 @@
 <robot name="stereolabs_camera" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:arg name="camera_name"   default="zed" />
   <xacro:arg name="camera_model"  default="zed" />
-  <xacro:arg name="base_frame"    default="base_link" />
-  <xacro:arg name="cam_pos_x"     default="0.0" />
-  <xacro:arg name="cam_pos_y"     default="0.0" />
-  <xacro:arg name="cam_pos_z"     default="0.0" />
-  <xacro:arg name="cam_roll"      default="0.0" />
-  <xacro:arg name="cam_pitch"     default="0.0" />
-  <xacro:arg name="cam_yaw"       default="0.0" />
-  <xacro:arg name="gnss_frame"    default="" />
+  <xacro:arg name="custom_baseline"  default="0.0" />
+  <!-- If GNSS fusion is enabled the position of the antenna with respect to the camera mount point is required -->
+  <xacro:arg name="enable_gnss"   default="false" />
+  <xacro:arg name="gnss_x" default="0.0" />
+  <xacro:arg name="gnss_y" default="0.0" />
+  <xacro:arg name="gnss_z" default="0.0" />
 
-  <xacro:include filename="$(find urdf_viewer)/urdf/zed_macro.urdf.xacro" />
-  <xacro:zed_camera name="$(arg camera_name)" model="$(arg camera_model)" parent="$(arg base_frame)">
-    <origin 
-      xyz="$(arg cam_pos_x) $(arg cam_pos_y) $(arg cam_pos_z)" 
-      rpy="$(arg cam_roll) $(arg cam_pitch) $(arg cam_yaw)"
-    />
+  <xacro:include filename="$(find zed_wrapper)/urdf/zed_macro.urdf.xacro" />
+  <xacro:zed_camera name="$(arg camera_name)" model="$(arg camera_model)" custom_baseline="$(arg custom_baseline)" enable_gnss="$(arg enable_gnss)">
+	    <origin xyz="$(arg gnss_x) $(arg gnss_y) $(arg gnss_z)" rpy="0 0 0"/>
   </xacro:zed_camera>
-
-  <link name="$(arg base_frame)" />
 </robot>

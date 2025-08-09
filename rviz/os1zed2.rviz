@@ -6,8 +6,14 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /RobotModel1
         - /TF1
-      Splitter Ratio: 0.5
+        - /TF1/Tree1
+        - /TF1/Tree1/base_link1
+        - /TF1/Tree1/base_link1/rot_link1
+        - /TF1/Tree1/base_link1/rot_link1/os11
+        - /TF1/Tree1/base_link1/rot_link1/zed2i_camera_link1
+      Splitter Ratio: 0.5382353067398071
     Tree Height: 527
   - Class: rviz_common/Selection
     Name: Selection
@@ -58,14 +64,60 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: ""
+        Value: /robot_description
       Enabled: true
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        Link Tree Style: ""
+        Link Tree Style: Links in Alphabetic Order
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        os1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        os1_imu:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        os1_lidar:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        rot_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed2i_camera_center:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        zed2i_camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed2i_left_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed2i_left_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed2i_right_camera_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        zed2i_right_camera_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Mass Properties:
         Inertia: false
         Mass: false
@@ -81,7 +133,7 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        bask_link:
+        base_link:
           Value: true
         os1:
           Value: true
@@ -89,9 +141,11 @@ Visualization Manager:
           Value: true
         os1_lidar:
           Value: true
-        zed2i_base_link:
+        rot_link:
           Value: true
         zed2i_camera_center:
+          Value: true
+        zed2i_camera_link:
           Value: true
         zed2i_left_camera_frame:
           Value: true
@@ -107,94 +161,27 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        bask_link:
-          os1:
-            os1_imu:
-              {}
-            os1_lidar:
-              {}
-          zed2i_base_link:
-            zed2i_camera_center:
-              zed2i_left_camera_frame:
-                zed2i_left_camera_optical_frame:
-                  {}
-              zed2i_right_camera_frame:
-                zed2i_right_camera_optical_frame:
-                  {}
+        base_link:
+          rot_link:
+            os1:
+              os1_imu:
+                {}
+              os1_lidar:
+                {}
+            zed2i_camera_link:
+              zed2i_camera_center:
+                zed2i_left_camera_frame:
+                  zed2i_left_camera_optical_frame:
+                    {}
+                zed2i_right_camera_frame:
+                  zed2i_right_camera_optical_frame:
+                    {}
       Update Interval: 0
       Value: true
-    - Alpha: 1
-      Class: rviz_default_plugins/RobotModel
-      Collision Enabled: false
-      Description File: ""
-      Description Source: Topic
-      Description Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /robot_description
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        bask_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        os1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        os1_imu:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        os1_lidar:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        zed2i_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        zed2i_camera_center:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        zed2i_left_camera_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        zed2i_left_camera_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        zed2i_right_camera_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        zed2i_right_camera_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-      Mass Properties:
-        Inertia: false
-        Mass: false
-      Name: RobotModel
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: bask_link
+    Fixed Frame: base_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -237,7 +224,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 0.4389215111732483
+      Distance: 0.5542725324630737
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -252,10 +239,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.09039850533008575
+      Pitch: 0.2153981626033783
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.4403973817825317
+      Yaw: 1.5553975105285645
     Saved: ~
 Window Geometry:
   Displays:
