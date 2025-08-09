@@ -30,24 +30,24 @@
 
   <!-- Ouster OS1-64 -->
   <xacro:OS1-64 parent="$(arg rot_link)"
-                name="os1"
+                name="os_sensor"
                 topic_points="/os1/points"
                 topic_imu="/os1/imu"
-                lidar_link="os1_lidar"
-                imu_link="os1_imu">
+                lidar_link="os_lidar"
+                imu_link="os_imu">
     <origin xyz="$(arg os1_xyz)" rpy="$(arg os1_rpy)"/>
   </xacro:OS1-64>
 
   <!-- ZED2i: instantiate macro (creates zed2i_camera_link …), then mount it -->
-  <xacro:zed_camera name="zed2i" model="zed2i" enable_gnss="false">
+  <xacro:zed_camera name="zed" model="zed2i" enable_gnss="false">
   <!-- block required by *gnss_origin; used only if GNSS is enabled -->
   <origin xyz="0 0 0" rpy="0 0 0"/>
 </xacro:zed_camera>
 
   <!-- Mount ZED to rot_link (this replaces the old 'parent' + nested origin) -->
-  <joint name="zed2i_mount" type="fixed">
+  <joint name="zed_mount" type="fixed">
     <parent link="$(arg rot_link)"/>
-    <child  link="zed2i_camera_link"/>
+    <child  link="zed_camera_link"/>
     <origin xyz="$(arg zed_xyz)" rpy="$(arg zed_rpy)"/>
   </joint>
 
