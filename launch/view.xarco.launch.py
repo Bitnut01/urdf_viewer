@@ -17,9 +17,9 @@ def generate_launch_description():
         DeclareLaunchArgument('use_sim_time', default_value='false'),
 
         Node(
-            package='joint_state_publisher_gui',
-            executable='joint_state_publisher_gui',
-            name='joint_state_publisher_gui'
+            package='joint_state_publisher',
+            executable='joint_state_publisher',
+            name='joint_state_publisher'
         ),
 
         Node(
@@ -39,11 +39,11 @@ def generate_launch_description():
             }]
         ),
 
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', rviz_config],
-            output='screen'
-        ),
+#        Node(
+#            package='rviz2',
+#            executable='rviz2',
+#            name='rviz2',
+#            arguments=['-d', rviz_config],
+#            output='screen'
+#        ),
     ])
